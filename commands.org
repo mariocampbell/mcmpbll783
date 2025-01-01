@@ -1,0 +1,10 @@
+#+title: Commands
+# compile
+command: qmk compile -kb crkbd/r2g -km mcmpbll783
+
+# flash
+# con ruta completa del .build
+command:  avrdude -v -p atmega32u4 -c avr109 -U flash:w:/home/mcmpbll783/qmk_firmware/.build/crkbd_r2g_mcmpbll783.hex:i -P /dev/ttyACM0
+
+# qmk clean
+command: qmk clean
