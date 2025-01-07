@@ -5,8 +5,49 @@ enum layers {
     _QWERTY,
     _LOWER,
     _RAISE,
-    _ADJUST
+    _ADJUST,
 };
+
+// Define modo de animaciones
+uint32_t base_mode = RGBLIGHT_MODE_STATIC_LIGHT;
+uint32_t lock_mode = RGBLIGHT_MODE_KNIGHT;
+
+void keyboard_post_init_user(void) {
+    rgblight_enable_noeeprom();
+    layer_state_set_user(layer_state);
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    uint8_t layer = biton32(state);
+
+    switch(layer) {
+    case _LOWER:
+        rgblight_sethsv_noeeprom(HSV_GREEN);
+        break;
+
+    case _RAISE:
+        rgblight_sethsv_noeeprom(HSV_ORANGE);
+        break;
+
+    case _ADJUST:
+        rgblight_sethsv_noeeprom(HSV_MAGENTA);
+        break;
+
+    default:
+        rgblight_sethsv_noeeprom(HSV_CYAN);
+        break;
+    }
+    return state;
+}
+
+bool led_update_user(led_t led_state) {
+   if(led_state.caps_lock) {
+       rgblight_mode_noeeprom(lock_mode);
+   } else {
+       rgblight_mode_noeeprom(base_mode);
+   }
+   return true;
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
