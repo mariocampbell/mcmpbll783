@@ -1,3 +1,5 @@
+#define MASTER_LEFT
+
 #define RGB_DI_PIN D0
 #define RGBLIGHT_LED_COUNT 54
 #define RGBLIGHT_ANIMATIONS

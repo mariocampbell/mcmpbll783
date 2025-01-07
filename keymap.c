@@ -8,45 +8,107 @@ enum layers {
     _ADJUST,
 };
 
-// Define modo de animaciones
-uint32_t base_mode = RGBLIGHT_MODE_STATIC_LIGHT;
-uint32_t lock_mode = RGBLIGHT_MODE_KNIGHT;
+// ###############################################################
+// // Define modo de animaciones
+// uint32_t base_mode = RGBLIGHT_MODE_STATIC_LIGHT;
+// uint32_t lock_mode = RGBLIGHT_MODE_KNIGHT;
+//
+// void keyboard_post_init_user(void) {
+//     rgblight_enable_noeeprom();
+//     layer_state_set_user(layer_state);
+// }
+//
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     uint8_t layer = biton32(state);
+//
+//     switch(layer) {
+//     case _LOWER:
+//         rgblight_sethsv_noeeprom(HSV_GREEN);
+//         break;
+//
+//     case _RAISE:
+//         rgblight_sethsv_noeeprom(HSV_ORANGE);
+//         break;
+//
+//     case _ADJUST:
+//         rgblight_sethsv_noeeprom(HSV_MAGENTA);
+//         break;
+//
+//     default:
+//         rgblight_sethsv_noeeprom(HSV_CYAN);
+//         break;
+//     }
+//     return state;
+// }
+//
+// bool led_update_user(led_t led_state) {
+//    if(led_state.caps_lock) {
+//        rgblight_mode_noeeprom(lock_mode);
+//    } else {
+//        rgblight_mode_noeeprom(base_mode);
+//    }
+//    return true;
+// }
+// ###############################################################
+
+// Definición de capas RGB
+const rgblight_segment_t PROGMEM QWERTY_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 54, HSV_CYAN}
+);
+
+const rgblight_segment_t PROGMEM LOWER_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 54, HSV_GREEN}
+);
+
+const rgblight_segment_t PROGMEM RAISE_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 54, HSV_ORANGE}
+);
+
+const rgblight_segment_t PROGMEM ADJUST_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 54, HSV_MAGENTA}
+);
+
+const rgblight_segment_t PROGMEM CAPSLOCK_LAYER[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 6, HSV_RED},
+    {6, 1, HSV_RED},
+    {13, 1, HSV_RED},
+    {14, 1, HSV_RED},
+    {24, 3, HSV_RED},
+
+    {27, 6, HSV_RED},
+    {33, 1, HSV_RED},
+    {40, 1, HSV_RED},
+    {41, 1, HSV_RED},
+    {51, 3, HSV_RED}
+);
+
+// Lista de capas RGB
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    QWERTY_LAYER,
+    LOWER_LAYER,
+    RAISE_LAYER,
+    ADJUST_LAYER,
+    CAPSLOCK_LAYER
+);
 
 void keyboard_post_init_user(void) {
-    rgblight_enable_noeeprom();
-    layer_state_set_user(layer_state);
+ // Asignar las capas RGB
+ rgblight_layers = my_rgb_layers;
 }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    uint8_t layer = biton32(state);
-
-    switch(layer) {
-    case _LOWER:
-        rgblight_sethsv_noeeprom(HSV_GREEN);
-        break;
-
-    case _RAISE:
-        rgblight_sethsv_noeeprom(HSV_ORANGE);
-        break;
-
-    case _ADJUST:
-        rgblight_sethsv_noeeprom(HSV_MAGENTA);
-        break;
-
-    default:
-        rgblight_sethsv_noeeprom(HSV_CYAN);
-        break;
-    }
-    return state;
-}
-
+// Control de LEDs (Caps Lock)
 bool led_update_user(led_t led_state) {
-   if(led_state.caps_lock) {
-       rgblight_mode_noeeprom(lock_mode);
-   } else {
-       rgblight_mode_noeeprom(base_mode);
-   }
-   return true;
+    rgblight_set_layer_state(4, led_state.caps_lock); // Activar capa CAPSLOCK si está activado
+    return true;
+}
+
+// Control de capas
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, _QWERTY));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
+    return state;
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
