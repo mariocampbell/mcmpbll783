@@ -150,11 +150,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_ADJUST] = LAYOUT(
     //|-----------------------------------------------------|                    |-----------------------------------------------------|
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                      KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PMNS,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  MS_UP,  RGB_TOG,                      KC_VOLU, MS_BTN1, MS_WHLU, XXXXXXX, XXXXXXX, KC_PMNS,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_RCTL, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                      KC_VOLD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PPLS,
+       KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, MS_DOWN, RGB_MOD,                      MS_LEFT, MS_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, KC_PPLS,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, XXXXXXX,                      KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE,                      KC_VOLD, MS_BTN2, MS_WHLD, XXXXXXX, XXXXXXX, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                            KC_LGUI, MO(_ADJUST), KC_SPC,   KC_ENT,  KC_RGUI, MO(_RAISE)
                                         //|--------------------------|  |--------------------------|

@@ -18,3 +18,15 @@
 #define RGBLIGHT_HUE_STEP 8  // Ajusta la velocidad de cambio de tono
 #define RGBLIGHT_SAT_STEP 8  // Ajusta la velocidad de cambio de saturación
 #define RGBLIGHT_VAL_STEP 8  // Ajusta la velocidad de cambio de brillo
+
+// mouse configs
+#define OUSEKEY_DELAY 10 // Retraso entre presionar una tecla de movimiento y el movimiento del cursor
+#define OUSEKEY_INTERVAL 10 // Tiempo entre movimientos del cursor en milisegundos
+#define OUSEKEY_MOVE_DELTA 6 // Tamaño del paso
+#define OUSEKEY_MAX_SPEED 10 // Velocidad máxima del cursor en la que se detiene la aceleración
+#define OUSEKEY_TIME_TO_MAX 30 // Tiempo hasta que se alcanza la velocidad máxima del cursor
+#define OUSEKEY_WHEEL_DELAY 10 // Retraso entre presionar una tecla de rueda y el movimiento de la rueda
+#define OUSEKEY_WHEEL_INTERVAL 80 // Tiempo entre movimientos de las ruedas
+#define OUSEKEY_WHEEL_DELTA 1 // Tamaño del paso del movimiento de la rueda
+#define OUSEKEY_WHEEL_MAX_SPEED 8 // Número máximo de pasos de desplazamiento por acción de desplazamiento
+#define OUSEKEY_WHEEL_TIME_TO_MAX 40 // Tiempo hasta que se alcanza la velocidad máxima de desplazamiento
